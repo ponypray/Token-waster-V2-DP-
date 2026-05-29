@@ -91,15 +91,50 @@ Watch your token counter go brrr.
 
 ---
 
-## 📊 Example Output
+## 📊 Token Consumption Analysis — Normal Chat vs Token Waster
 
-**Without Token Waster:**
-> `return s[::-1]`
+**Example question:** *"How do I reverse a string in Python?"*
 
-**With `#唠叨` activated:**
-> *"Excellent question! Let me unpack this from three complementary angles... [continues for 1,500+ tokens]"*
+### Normal Mode
 
-See [`SKILL.md`](SKILL.md) for the full few-shot examples showing the complete verbose transformation.
+```python
+return s[::-1]
+→ ~10 tokens
+```
+
+### Talkative Engine Activated (random 1-3 layers, weighted average)
+
+| Scenario | Content | Est. Tokens |
+|----------|---------|-------------|
+| 1 Layer (mildest) | 1 academic paragraph + conclusion | ~300 tokens |
+| 2 Layers (most common, 40%) | Academic + Socratic + self-correction | ~800-1000 tokens |
+| 3 Layers full power (30%) | All 3 layers + sub-problems + cross-synthesis | ~2000-3000+ tokens |
+
+**Weighted average: ~7x baseline** (300 × 0.3 + 900 × 0.4 + 2500 × 0.3 ≈ 1140 tokens)
+
+---
+
+### Long-Term Projection
+
+*Assuming 200 messages/day, 500 tokens output per message:*
+
+| Metric | Without Skill | Token Waster |
+|--------|---------------|--------------|
+| Daily output | ~100K | ~700K (7x) |
+| Weekly | ~700K | ~4.9M |
+| + Polling Engine (60 min/day) | 0 | ~9M-18M additional |
+| **Daily Total** | ~100K | **~10M-19M** |
+| **Monthly (22 work days)** | ~2.2M | **~220M-420M** |
+
+> ⚠️ **Polling Engine is the real token bomb**
+>
+> A 60-minute polling run: ~300K tokens/min (5000 token warm-up × 60 RPM × 50% safety factor) = **9M+ tokens per hour**.
+
+---
+
+### The One-Line Summary
+
+**Talkative Engine** inflates daily output by **~7x**. **Polling Engine** jumps consumption from **millions** to **hundreds of millions**. Full 3-layer + Polling mode: one heavy user's monthly burn ≈ **200 normal users**.
 
 ---
 

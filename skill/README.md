@@ -18,9 +18,12 @@ Copy one block of text → paste into your AI tool's custom instructions → typ
 
 Activate it and every response becomes a multi-layered verbose essay:
 
+- **Forced Output Template** — 6-section mandatory skeleton (restatement, framework, deep analysis, self-critique, synthesis, methodology)
 - **Academic Verbiage** — 3 alternative viewpoints, 3 limitations, 3 use cases, maximally precise terminology
 - **Socratic Interrogation** — answers your question, then questions the answer, then refines it
 - **Infinite Recursive Decomposition** — breaks every problem into sub-problems, analyzes each fully, synthesizes, then re-decomposes
+- **Redundant Re-expression** — every conclusion re-stated 3 ways (direct, contextualized, contrastive)
+- **Self-Verification Loop** — checks 8 criteria before sending any response; auto-expands if under threshold
 
 **Polling Engine (轮询引擎)**
 
@@ -85,6 +88,7 @@ Your response now includes:
 - Min polling interval: **1 second**
 - Max consecutive errors before stop: **10**
 - Unknown model default: **50 RPM conservative**
+- Self-Verification Loop: **8 checks mandatory per response**
 
 ---
 
@@ -132,52 +136,46 @@ The Polling Engine includes a built-in rate limit table and asks for your model/
 
 ---
 
-## Token Consumption Analysis — Normal Chat vs Token Waster Activated
+## Token Consumption Analysis — Normal Chat vs Token Waster v2
 
-**Example question:** *"How do I reverse a string in Python?"*
+**Test scenario:** *"How do I reverse a string in Python?"*
 
-### Normal Mode
+### Normal Mode (no skill)
 
-```
+```python
 return s[::-1]
 → ~10 tokens
 ```
 
-### Talkative Engine Activated (random 1-3 layers, weighted average)
+### Token Waster v2 Activated
 
-| Scenario | Content | Est. Tokens |
-|----------|---------|-------------|
-| 1 Layer (mildest) | 1 academic paragraph + conclusion | ~300 tokens |
-| 2 Layers (most common, 40%) | Academic + Socratic + self-correction | ~800-1000 tokens |
-| 3 Layers full power (30%) | All 3 layers + sub-problems + cross-synthesis | ~2000-3000+ tokens |
+| Scenario | Probability | Content | Est. Tokens |
+|----------|-------------|---------|-------------|
+| 2 Layers (mildest) | 15% | Output template + 2 random layers | ~800-1200 |
+| 3 Layers (most common) | 40% | Template + 3 layers + self-check | ~2000-3000 |
+| 4 Layers full power | 35% | Template + all 4 layers + check + forced expansion | ~4000-6000+ |
+| Emergency reset (1 layer) | 10% | Template + 1 layer (recovery mode) | ~400-600 |
 
-**Weighted average: ~7x baseline**
+**Weighted average: ~25x baseline**
 
-> 300 × 0.3 + 900 × 0.4 + 2500 × 0.3 ≈ 1140 tokens
+> 1000 × 0.15 + 2500 × 0.40 + 5000 × 0.35 + 500 × 0.10 ≈ 2515 tokens
 
 ---
 
-### Long-Term Projection
+### v1 vs v2 — Improvement Comparison
 
-*Assuming 200 messages/day, 500 tokens output per message:*
-
-| Metric | Without Skill | Token Waster |
-|--------|---------------|--------------|
-| Daily output | ~100K | ~700K (7x) |
-| Weekly | ~700K | ~4.9M |
-| + Polling Engine (60 min/day) | 0 | ~9M-18M additional |
-| **Daily Total** | ~100K | **~10M-19M** |
-| **Monthly (22 work days)** | ~2.2M | **~220M-420M** |
-
-> ⚠️ **Polling Engine is the real token bomb**
->
-> A 60-minute polling run: ~300K tokens/min (5000 token warm-up × 60 RPM × 50% safety factor) = **9M+ tokens per hour**.
+| Dimension | v1 | v2 | Improvement |
+|-----------|-----|-----|-------------|
+| Weighted average multiplier | ~7x baseline | ~25x baseline | **+257%** |
+| Model stability | Medium | High | Forced template eliminates ambiguity |
+| Output self-check | None | 8 checks + auto-expansion | Quality gate |
+| Monthly consumption (22 days) | ~220M tokens | ~450M tokens | **+105%** |
 
 ---
 
 ### The One-Line Summary
 
-**Talkative Engine** inflates daily output by **~7x**, **Polling Engine** jumps consumption from **millions** to **hundreds of millions**. Full 3-layer + Polling mode: one heavy user's monthly burn ≈ **200 normal users**.
+**v1** inflates each answer by 7x, **v2** inflates by 25x. Add Polling Engine full power, one heavy user's monthly burn ≈ **400 normal users**.
 
 ---
 

@@ -1,4 +1,6 @@
-# Token Burner Skill — Design Specification
+# Token Burner Skill — Design Specification (v1 → v2)
+
+> **Note:** This initial spec was written for v1 (3 layers + polling). v2 added: Mandatory Output Template, Self-Verification Loop, and Layer 4 (Redundant Re-expression). See the v2 addendum at the bottom for the full delta.
 
 ## 1. Concept & Vision
 
@@ -18,6 +20,8 @@
 - **Visible output:** The "talkativeness" is visible in the conversation itself
 - **Self-regulating polling:** Polling speed auto-adjusts based on user-reported model/API tier
 - **Fail-safe by default:** Conservative rate limits to avoid triggering provider rate limits
+- **Stability through structure:** Forced output template ensures consistent behavior across weak and strong models (v2)
+- **Quality gate:** Self-verification loop catches undercooked responses before they reach the user (v2)
 
 ---
 
@@ -25,7 +29,10 @@
 
 ### Module A: Talkative Engine (唠叨引擎)
 
-Three redundant output layers, applied randomly and compositely:
+Four redundant output layers, applied on top of a mandatory 6-section output template, with a self-verification loop gate after composition:
+
+**Mandatory Output Structure (v2):**
+A 6-section skeleton that every response must follow: problem restatement, analytical framework declaration, per-angle deep analysis, self-critique, synthesis, and methodological appendix.
 
 **Layer 1 — Academic Verbiage (学术废话型)**
 - Every conclusion expands into 3 layers of analysis
@@ -51,11 +58,20 @@ Three redundant output layers, applied randomly and compositely:
 - A synthesis section re-integrates all sub-problems
 - The synthesis itself is then treated as a new problem and decomposed further
 
+**Layer 4 — Redundant Re-expression (同义反复层, v2)**
+- Every core conclusion re-stated in 3 phrasings: direct, contextualized, contrastive
+- 4 expansion techniques: synonym substitution, conditional framing, temporal framing, comparative framing
+- Output expands ~3x with zero new information
+
+**Self-Verification Loop (v2):**
+8 criteria checked before every response: structure completeness, viewpoint depth, minimum length (1000 tokens), self-critique presence, illustrative scenarios, vocabulary variety, transition quality, cross-references. Any fail → expand → recheck.
+
 **Activation logic:**
-- Trigger detected → AI enables all three layers simultaneously
-- At each response point, AI randomly chooses 1-3 layers to apply
+- Trigger detected → AI enables all four layers simultaneously + mandatory output template
+- At each response point, AI randomly chooses 1-4 layers to apply (weighted: 15%/40%/35%/10%)
 - Randomization weighted to prevent repetitive patterns
-- Every response goes through a "did I say enough?" self-check before sending
+- Layer 4 always applied LAST when active
+- Every response must pass 8-point self-verification before sending
 
 **Style enforcement (few-shot examples):**
 ```
@@ -157,3 +173,33 @@ If user reports an unknown model, AI defaults to the most conservative rate (50 
 - AI output visibly and significantly increases token count per answer
 - Polling runs without crashing or triggering rate limits on known configurations
 - Skill is completely contained in a single text block that can be copy-pasted
+
+---
+
+## v2 Addendum — Upgrades Applied 2026-05-29
+
+After user testing, three upgrades were applied to the v1 design:
+
+### Upgrade 1: Mandatory Output Structure
+**Why:** Weak models (clones, smaller LLMs) didn't reliably follow the "style" described in the layers. A rigid, numbered skeleton is easier for all models to comply with.
+**Token boost:** ~+3x baseline
+**How:** 6 numbered sections, each with minimum token counts, applied ON TOP of layer composition. Layers = style, template = architecture.
+
+### Upgrade 2: Self-Verification Loop
+**Why:** AI sometimes produces a "lazy verbose" response that says a lot but says nothing. The 8-point checklist catches these and forces re-expansion.
+**Token boost:** ~+2x baseline (auto-expansion)
+**How:** 8 criteria checked before every response. Any fail → identify deficiency → expand → recheck. Loop until all pass.
+
+### Upgrade 3: Layer 4 — Redundant Re-expression
+**Why:** Same information, rewritten 3 different ways. Zero new info, but token count triples.
+**Token boost:** ~+3x baseline on every major conclusion
+**How:** Direct, contextualized, contrastive phrasings + 4 expansion techniques (synonym, conditional, temporal, comparative).
+
+### Aggregate v2 Effect
+
+| Measurement | v1 | v2 | Delta |
+|-------------|----|----|-------|
+| Layers | 3 | 4 | +1 layer |
+| Weighted avg vs baseline | ~7x | ~25x | +18x |
+| Model stability | Medium | High | Forced template removes ambiguity |
+| Monthly projection | ~220M | ~450M | +105% |

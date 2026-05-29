@@ -211,4 +211,14 @@ git commit -m "feat: add Token Waster skill — universal verbose/polling token 
 
 **2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
 
-**Which approach?**
+---
+
+## Post-Execution v2 Upgrades
+
+After user testing, these upgrades were implemented on top of the v1 plan:
+
+1. **Mandatory Output Structure** — 6-section skeleton applied ON TOP of layer composition (improves weak model stability)
+2. **Self-Verification Loop** — 8 criteria checked before every response; auto-expand under threshold
+3. **Layer 4 — Redundant Re-expression** — every conclusion re-stated 3 ways (direct, contextualized, contrastive)
+
+**Token impact:** v1 ~7x → v2 ~25x baseline

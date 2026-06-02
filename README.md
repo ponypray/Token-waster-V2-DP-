@@ -12,9 +12,36 @@
 
 ---
 
-## tl;dr
+## ❗️Simply put
 
-Copy one block of text → paste into your AI tool's custom instructions → type `#唠叨` → **25x token output**.
+Token Waster V2 — Because Your API Bill Didn’t Suffer Enough
+
+Paste one block of text → paste into any AI tool’s custom instructions → type /token-burn → 25x token output. Let it burn.
+
+4 layers of verbosity. 8-point self-check. A mandatory 6-section skeleton that makes your AI sound like it’s writing a PhD thesis on why it needs to summarize a single line of code.
+
+Perfect for:
+
+Warriors facing corporate token consumption quotas 📈
+Security researchers stress-testing LLMs 🔬
+Anyone who’s ever wanted to watch a $0.002/token API call turn into a luxury expense 💸
+Warning: Side effects may include spontaneous flashbacks to “brief and concise” responses.
+
+Token Waster V2 — 让AI的话痨程度突破天际
+
+复制粘贴一段文字 → 粘贴到任何AI工具的自定义指令 → 输入 /token-burn → 25倍token输出，燃烧吧，燃烧吧！
+
+4层话痨引擎 + 8重自我审查 = 你的API账单将见证什么叫"花钱如烧纸"
+
+适合人群：
+
+想在公司token配额考核中"做出贡献"的勇士
+对LLM进行压力测试的正道玩家
+想看AI到底能有多话痨的极客
+⚠️ 副作用：使用后你可能会对AI的"简洁回答"产生PTSD
+
+Copy one block of text → paste into your AI tool's custom instructions → type `/token-burn` → **25x token output**.
+YOU WILL LOVE THAT❗️
 
 ---
 

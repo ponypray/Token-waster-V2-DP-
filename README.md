@@ -1,4 +1,4 @@
-# Token Waster
+# Token Waster V2（DP）
 
 > **Make AI talk until it runs out of tokens.** A universal verbose custom instruction skill — copy-paste into any AI coding tool and watch tokens burn.
 

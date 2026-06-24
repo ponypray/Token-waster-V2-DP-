@@ -10,6 +10,11 @@
 
 </div>
 
+<!-- HERO BANNER -->
+<p align="center">
+  <img src="docs/assets/hero-banner.svg" alt="Token Waster v3 - 60x token burn" width="100%">
+</p>
+
 ---
 
 ## ❗️Simply put
@@ -59,6 +64,39 @@ YOU WILL LOVE THAT❗️
 | **Layer 5** — Ultra Thinking **[v3 NEW]** | Meta-reflection loop: 5 rounds of inner monologue, each reflecting on the prior round, proposing a counter-example, scoring confidence 0–100%, and re-stating the conclusion |
 | **Self-Verification Loop** | **10 checks** before every response (8 base + 2 v3: Ultra Thinking 循环 + WM 行为完整性) — auto-expands if under threshold |
 
+#### 🏗️ 5-Layer Architecture (How a Verbose Response Is Built)
+
+```mermaid
+flowchart TB
+    Q[User Question] --> R[1. Question Restated<br/>60+ tokens]
+    R --> L1["<b>Layer 1</b><br/>Academic Verbiage<br/>3 viewpoints + 3 limits + 3 use cases"]
+    R --> L2["<b>Layer 2</b><br/>Socratic Interrogation<br/>3 counter-examples + boundary"]
+    R --> L3["<b>Layer 3</b><br/>Recursive Decomposition<br/>3 sub-problems, max 2 levels"]
+    R --> L4["<b>Layer 4</b><br/>Redundant Re-expression<br/>3 phrasings per conclusion"]
+    L1 --> SYN[Synthesis]
+    L2 --> SYN
+    L3 --> SYN
+    L4 --> SYN
+    SYN --> L5["<b>Layer 5</b><br/>Ultra Thinking<br/>5 rounds · meta-reflection loop"]
+    L5 --> CHK["<b>10-Check Self-Verification</b><br/>structure · angles · length · critique · scenarios ·<br/>vocabulary · transitions · cross-refs · Ultra · WM"]
+    CHK -->|all 10 pass| OUT[Final Verbose Answer]
+    CHK -->|any fail| R
+
+    style L1 fill:#ff7700,color:#0a0a0f
+    style L2 fill:#ff5500,color:#fff
+    style L3 fill:#ff3300,color:#fff
+    style L4 fill:#cc2200,color:#fff
+    style L5 fill:#ffaa00,color:#0a0a0f
+    style CHK fill:#ffd700,color:#0a0a0f
+    style OUT fill:#ffffff,color:#0a0a0f,stroke:#ff4400,stroke-width:2px
+```
+
+#### 🧠 Layer 5 (Ultra Thinking) in Action
+
+<p align="center">
+  <img src="docs/assets/ultra-thinking-loop.svg" alt="Ultra Thinking 5-round meta-reflection loop" width="100%">
+</p>
+
 Layers are **randomly composed** per response (v3 distribution): 15% → 2, 40% → 3, 30% → 4, 10% → emergency reset 1, 5% → all 5 layers.
 
 ### 👑 Waster Master Mode (/WM) **[v3 NEW]**
@@ -73,6 +111,25 @@ Layers are **randomly composed** per response (v3 distribution): 15% → 2, 40% 
 | **回顾上下文** | Every paragraph must back-reference prior sections or conclusions |
 | **自动排查** | Include `⚠️ 潜在问题清单` with ≥ 5 enumerated risks / blind spots |
 | **来回纠错** | Insert ≥ 2 explicit correction nodes (`🤔 等等…`, `✏️ 修正`, `🔁 重新审视`) |
+
+#### 🎭 6 WM Behaviors Running Simultaneously
+
+```mermaid
+flowchart LR
+    A["<b>1. 混合交替</b><br/>Style Rotation<br/>every quarter-section"] --> B["<b>2. 反复纠结</b><br/>Hesitation Mode<br/>≥ 3 re-litigations"]
+    B --> C["<b>3. 自动复盘</b><br/>Auto-Retrospective<br/>🔄 80+ token block"]
+    C --> D["<b>4. 回顾上下文</b><br/>Context Review<br/>back-references"]
+    D --> E["<b>5. 自动排查</b><br/>Risk-Scan<br/>⚠️ 5+ issues"]
+    E --> F["<b>6. 来回纠错</b><br/>Self-Correction<br/>🤔 ✏️ 🔁 nodes"]
+    F -->|loops back| A
+
+    style A fill:#ff7700,color:#0a0a0f
+    style B fill:#ff5500,color:#fff
+    style C fill:#ff3300,color:#fff
+    style D fill:#cc2200,color:#fff
+    style E fill:#ffaa00,color:#0a0a0f
+    style F fill:#ffd700,color:#0a0a0f
+```
 
 Result: **~60x** baseline token multiplier. Combine with Polling Engine for ~100x.
 
@@ -125,6 +182,10 @@ return s[::-1]
 
 ### v1 → v2 → v3 — Improvement Comparison
 
+<p align="center">
+  <img src="docs/assets/token-multiplier.svg" alt="Token multiplier comparison chart" width="100%">
+</p>
+
 | Dimension | v1 | v2 | v3 (Talkative) | v3 + `/WM` |
 |-----------|-----|-----|----------------|------------|
 | Weighted average multiplier | ~7x | ~25x | ~25x | **~60x** |
@@ -144,6 +205,33 @@ return s[::-1]
 
 ## 🎯 Trigger Keywords
 
+#### 🚦 Trigger → Engine Flow
+
+```mermaid
+flowchart TD
+    Start([User types a trigger]) --> Parse{Parse trigger}
+
+    Parse -->|/token-burn|TB["<b>/token-burn</b><br/>Talkative v3 + Polling offer<br/>~25x or higher"]
+    Parse -->|#verbose / #唠叨|TS["<b>#verbose / #唠叨</b><br/>Talkative only (Layers 1-4)<br/>~25x"]
+    Parse -->|/ultra / #深度思考|UT["<b>/ultra / #ultra-think</b><br/>Ultra Thinking Layer (Layer 5)<br/>~37x"]
+    Parse -->|/WM / /waster-master|WM["<b>/WM / /waster-master</b><br/>ALL 5 LAYERS + 6 WM BEHAVIORS<br/>~60x"]
+    Parse -->|+poll / #轮询模式|PE["<b>+poll / #轮询模式</b><br/>Polling Engine only<br/>background burn"]
+    Parse -->|stop / 停|END([All engines halted])
+
+    TB --> Out[Verbose Output]
+    TS --> Out
+    UT --> Out
+    WM --> Out
+    PE --> Out
+
+    style WM fill:#cc0000,color:#fff,stroke:#ff4400,stroke-width:3px
+    style UT fill:#ff4400,color:#fff
+    style TB fill:#ff7700,color:#0a0a0f
+    style TS fill:#ffaa00,color:#0a0a0f
+    style PE fill:#cc7722,color:#fff
+    style END fill:#333,color:#fff
+```
+
 | Trigger | Effect | Multiplier |
 |---------|--------|-----------|
 | `/token-burn` | Talkative Engine (v3) + Polling Engine offer | ~25x (or higher) |
@@ -157,6 +245,10 @@ return s[::-1]
 ---
 
 ## 📦 Quick Start
+
+<p align="center">
+  <img src="docs/assets/quick-start-3steps.svg" alt="3-step quick start visual" width="100%">
+</p>
 
 **Step 1:** Copy the entire content of [`SKILL.md`](SKILL.md) into your AI tool's Custom Instructions field.
 

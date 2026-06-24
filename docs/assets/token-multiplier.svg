@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" role="img" aria-label="Token Waster multiplier comparison">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#f0f0f0"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffcc88"/>
+      <stop offset="100%" stop-color="#ff7733"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff7733"/>
+      <stop offset="100%" stop-color="#ff4400"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff4400"/>
+      <stop offset="100%" stop-color="#cc2200"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cc2200"/>
+      <stop offset="100%" stop-color="#990000"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#990000"/>
+      <stop offset="100%" stop-color="#440000"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="380" fill="url(#bg)" rx="8"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle"
+        font-family="'Arial Black', sans-serif"
+        font-size="22" font-weight="900" fill="#1a1a1a">
+    Token Output Multiplier vs. Normal Chat
+  </text>
+  <text x="450" y="58" text-anchor="middle"
+        font-family="monospace" font-size="13" fill="#666">
+    how many times more tokens one response burns
+  </text>
+
+  <!-- Y axis baseline -->
+  <line x1="180" y1="85" x2="180" y2="320" stroke="#333" stroke-width="2"/>
+
+  <!-- 100x reference line marker (where the bar would end at 100x) -->
+  <line x1="180" y1="320" x2="820" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="825" y="324" font-family="monospace" font-size="11" fill="#666">100x</text>
+
+  <!-- Scale ticks -->
+  <line x1="175" y1="320" x2="180" y2="320" stroke="#333"/>
+  <line x1="175" y1="279" x2="180" y2="279" stroke="#999" stroke-dasharray="2,2"/>
+  <text x="170" y="324" text-anchor="end" font-family="monospace" font-size="10" fill="#666">0</text>
+  <text x="170" y="284" text-anchor="end" font-family="monospace" font-size="10" fill="#666">25</text>
+
+  <!-- v1: 7x = ~46px wide (scale: 6.4px per x) -->
+  <g>
+    <rect x="180" y="95" width="46" height="32" fill="url(#bar1)" rx="3"/>
+    <text x="232" y="116" font-family="monospace" font-size="13" fill="#333" font-weight="bold">v1 · 7x</text>
+    <text x="240" y="135" font-family="monospace" font-size="10" fill="#888">1 layer, basic verbosity</text>
+  </g>
+
+  <!-- v2: 25x = ~160px wide -->
+  <g>
+    <rect x="180" y="145" width="160" height="32" fill="url(#bar2)" rx="3"/>
+    <text x="346" y="166" font-family="monospace" font-size="13" fill="#333" font-weight="bold">v2 · 25x</text>
+    <text x="354" y="185" font-family="monospace" font-size="10" fill="#888">4 layers + 8-check self-verify</text>
+  </g>
+
+  <!-- v3 Talkative: 25x = ~160px wide -->
+  <g>
+    <rect x="180" y="195" width="160" height="32" fill="url(#bar2)" rx="3"/>
+    <text x="346" y="216" font-family="monospace" font-size="13" fill="#333" font-weight="bold">v3 Talkative · 25x</text>
+    <text x="354" y="235" font-family="monospace" font-size="10" fill="#888">5 layers, optional Ultra loop</text>
+  </g>
+
+  <!-- v3 /WM: 60x = ~385px wide -->
+  <g>
+    <rect x="180" y="245" width="385" height="32" fill="url(#bar3)" rx="3"/>
+    <text x="571" y="266" font-family="monospace" font-size="13" fill="#fff" font-weight="bold">v3 /WM · 60x</text>
+    <text x="579" y="285" font-family="monospace" font-size="10" fill="#444">all 5 layers + 6 WM behaviors + 10-check</text>
+  </g>
+
+  <!-- v3 /WM + Polling: 100x = ~640px wide (full bar to 820) -->
+  <g>
+    <rect x="180" y="295" width="640" height="32" fill="url(#bar5)" rx="3"/>
+    <text x="710" y="316" font-family="monospace" font-size="14" fill="#fff" font-weight="bold">v3 /WM + Polling · 100x</text>
+    <text x="710" y="335" font-family="monospace" font-size="10" fill="#fff" opacity="0.85">max burn · background polling on top</text>
+  </g>
+
+  <!-- Bottom takeaway -->
+  <text x="450" y="365" text-anchor="middle"
+        font-family="'Arial Black', sans-serif"
+        font-size="14" fill="#cc2200" font-weight="900">
+    one heavy /WM user ≈ 1,000 normal users per month
+  </text>
+</svg>

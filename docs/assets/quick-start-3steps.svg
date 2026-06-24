@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" role="img" aria-label="Token Waster 3-step quick start">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#f5f0ee"/>
+    </linearGradient>
+    <linearGradient id="step1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ff7700"/>
+    </linearGradient>
+    <linearGradient id="step2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff7700"/>
+      <stop offset="100%" stop-color="#ff4400"/>
+    </linearGradient>
+    <linearGradient id="step3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff2400"/>
+      <stop offset="100%" stop-color="#990000"/>
+    </linearGradient>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0,0 L 10,5 L 0,10 Z" fill="#cc2200"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="240" fill="url(#bg)" rx="10"/>
+
+  <text x="450" y="35" text-anchor="middle"
+        font-family="'Arial Black', sans-serif"
+        font-size="20" font-weight="900" fill="#1a1a1a">
+    3-Step Quick Start
+  </text>
+
+  <!-- Step 1 -->
+  <g transform="translate(40, 70)">
+    <rect width="240" height="140" rx="14" fill="url(#step1)" opacity="0.92"/>
+    <circle cx="30" cy="30" r="22" fill="#0a0a0f"/>
+    <text x="30" y="38" text-anchor="middle" font-family="'Arial Black'" font-size="22" fill="#fff" font-weight="900">1</text>
+    <text x="50" y="78" font-family="'Arial Black'" font-size="15" fill="#0a0a0f" font-weight="900">COPY SKILL.md</text>
+    <text x="20" y="105" font-family="monospace" font-size="11" fill="#0a0a0f">paste into your AI tool's</text>
+    <text x="20" y="120" font-family="monospace" font-size="11" fill="#0a0a0f">Custom Instructions field</text>
+    <text x="20" y="138" font-family="monospace" font-size="10" fill="#1a1a1a" opacity="0.7">(Claude Code, Cursor, Codex, ...)</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <line x1="285" y1="140" x2="320" y2="140" stroke="#cc2200" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(335, 70)">
+    <rect width="240" height="140" rx="14" fill="url(#step2)" opacity="0.92"/>
+    <circle cx="30" cy="30" r="22" fill="#0a0a0f"/>
+    <text x="30" y="38" text-anchor="middle" font-family="'Arial Black'" font-size="22" fill="#fff" font-weight="900">2</text>
+    <text x="50" y="78" font-family="'Arial Black'" font-size="15" fill="#fff" font-weight="900">TYPE A TRIGGER</text>
+    <text x="20" y="105" font-family="monospace" font-size="11" fill="#fff">#唠叨 → ~25x</text>
+    <text x="20" y="120" font-family="monospace" font-size="11" fill="#fff">/ultra → ~37x</text>
+    <text x="20" y="138" font-family="monospace" font-size="11" fill="#fff">/WM → ~60x (max burn)</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <line x1="580" y1="140" x2="615" y2="140" stroke="#cc2200" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(625, 70)">
+    <rect width="240" height="140" rx="14" fill="url(#step3)" opacity="0.95"/>
+    <circle cx="30" cy="30" r="22" fill="#0a0a0f"/>
+    <text x="30" y="38" text-anchor="middle" font-family="'Arial Black'" font-size="22" fill="#fff" font-weight="900">3</text>
+    <text x="50" y="78" font-family="'Arial Black'" font-size="15" fill="#fff" font-weight="900">WATCH BURN 🔥</text>
+    <text x="20" y="105" font-family="monospace" font-size="11" fill="#fff">AI returns 1000s of</text>
+    <text x="20" y="120" font-family="monospace" font-size="11" fill="#fff">tokens where a normal</text>
+    <text x="20" y="138" font-family="monospace" font-size="11" fill="#fff">reply is 1 line.</text>
+  </g>
+</svg>

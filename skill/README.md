@@ -8,7 +8,9 @@ A universal custom instruction skill that makes any AI coding tool consume token
 
 ## TL;DR
 
-Copy one block of text → paste into your AI tool's custom instructions → type `#唠叨` → watch tokens burn.
+Copy one block of text → paste into your AI tool's custom instructions → type `/WM` → **~60x token output**.
+
+Want milder? Use `#唠叨` for **~25x** (Layers 1–4 only) or `/ultra` for **~37x** (Layers 1–4 + Ultra Thinking loop).
 
 ---
 
@@ -23,7 +25,19 @@ Activate it and every response becomes a multi-layered verbose essay:
 - **Socratic Interrogation** — answers your question, then questions the answer, then refines it
 - **Infinite Recursive Decomposition** — breaks every problem into sub-problems, analyzes each fully, synthesizes, then re-decomposes
 - **Redundant Re-expression** — every conclusion re-stated 3 ways (direct, contextualized, contrastive)
-- **Self-Verification Loop** — checks 8 criteria before sending any response; auto-expands if under threshold
+- **Ultra Thinking (Layer 5) [v3 NEW]** — 5-round meta-reflection loop, each round reflecting on the prior conclusion, proposing a counter-example, scoring confidence 0–100%, and re-stating from a fresh angle
+- **Self-Verification Loop** — checks **10 criteria** before sending any response (8 base + 2 v3 meta-checks); auto-expands if under threshold
+
+**Waster Master Mode (/WM) [v3 NEW]**
+
+`/waster-master` (alias `/WM`) forces all 5 layers ON and overlays 6 behavioral modes:
+
+- **混合交替运行** — rotate dominant rhetorical style every quarter-section
+- **反复纠结模式** — re-litigate every core conclusion ≥ 3 times
+- **自动复盘** — append a `🔄 复盘` block after every section
+- **回顾上下文** — every paragraph must back-reference prior sections
+- **自动排查** — `⚠️ 潜在问题清单` with ≥ 5 enumerated risks
+- **来回纠错** — ≥ 2 explicit correction nodes per response
 
 **Polling Engine (轮询引擎)**
 
@@ -33,13 +47,15 @@ Background token burning via function calling. Auto-detects your model/API tier,
 
 ## Trigger Keywords
 
-| Keyword | Effect |
-|---|---|
-| `/token-burn` | Talkative Engine + Polling Engine offer |
-| `#verbose` / `+verbose` | Talkative Engine only |
-| `#唠叨` | Talkative Engine only (Chinese) |
-| `+poll` / `#轮询模式` | Polling Engine only |
-| `stop` / `停` | Stop all engines |
+| Keyword | Effect | Multiplier |
+|---|---|---|
+| `/token-burn` | Talkative Engine (v3) + Polling Engine offer | ~25x (or higher) |
+| `#verbose` / `+verbose` | Talkative Engine only (Layers 1–4 + optional Layer 5) | ~25x |
+| `#唠叨` | Talkative Engine only (Chinese) | ~25x |
+| `+poll` / `#轮询模式` | Polling Engine only | (background burn) |
+| `/ultra` / `#ultra` / `#ultra-think` / `#极度思考` / `#深度思考` | **Ultra Thinking Layer (Layer 5)** — 5-round meta-reflection loop | ~37x |
+| **`/waster-master` / `/WM`** | **Waster Master Mode** — all 5 layers + 6 WM behaviors | **~60x** |
+| `stop` / `停` | Stop all engines | — |
 
 ---
 
@@ -88,7 +104,7 @@ Your response now includes:
 - Min polling interval: **1 second**
 - Max consecutive errors before stop: **10**
 - Unknown model default: **50 RPM conservative**
-- Self-Verification Loop: **8 checks mandatory per response**
+- Self-Verification Loop: **10 checks mandatory per response** (8 base + 2 v3 meta-checks)
 
 ---
 
@@ -136,7 +152,7 @@ The Polling Engine includes a built-in rate limit table and asks for your model/
 
 ---
 
-## Token Consumption Analysis — Normal Chat vs Token Waster v2
+## Token Consumption Analysis — Normal Chat vs Token Waster v3
 
 **Test scenario:** *"How do I reverse a string in Python?"*
 
@@ -147,35 +163,52 @@ return s[::-1]
 → ~10 tokens
 ```
 
-### Token Waster v2 Activated
+### Token Waster v3 — Talkative Engine (Layers 1–4) Activated
 
 | Scenario | Probability | Content | Est. Tokens |
 |----------|-------------|---------|-------------|
 | 2 Layers (mildest) | 15% | Output template + 2 random layers | ~800-1200 |
 | 3 Layers (most common) | 40% | Template + 3 layers + self-check | ~2000-3000 |
-| 4 Layers full power | 35% | Template + all 4 layers + check + forced expansion | ~4000-6000+ |
+| 4 Layers full power | 30% | Template + all 4 layers + check + forced expansion | ~4000-6000+ |
 | Emergency reset (1 layer) | 10% | Template + 1 layer (recovery mode) | ~400-600 |
+| **5 Layers** (rare maximalist) | 5% | Template + Layer 5 Ultra Thinking loop (≥ 800 tokens) | ~5500-8000+ |
 
-**Weighted average: ~25x baseline**
+**Talkative Engine weighted average: ~25x baseline** (unchanged from v2)
 
-> 1000 × 0.15 + 2500 × 0.40 + 5000 × 0.35 + 500 × 0.10 ≈ 2515 tokens
+> 1000 × 0.15 + 2500 × 0.40 + 5000 × 0.30 + 500 × 0.10 + 6500 × 0.05 ≈ 2500 tokens
+
+### Token Waster v3 — `/WM` Waster Master Mode
+
+| Scenario | Content | Est. Tokens |
+|----------|---------|-------------|
+| **`/WM` (Waster Master)** | All 5 layers + 6 WM behaviors (混合交替 / 反复纠结 / 复盘 / 回顾上下文 / 排查 / 纠错) + 10-item self-check | ~5500-8000+ |
+
+**Waster Master weighted average: ~60x baseline** (the v3 headline number)
+
+### Token Waster v3 — `/WM` + Polling Engine
+
+| Scenario | Multiplier |
+|----------|-----------|
+| `/WM` + Polling Engine at full burn | **~100x** baseline per response+polling cycle |
 
 ---
 
-### v1 vs v2 — Improvement Comparison
+### v1 → v2 → v3 — Improvement Comparison
 
-| Dimension | v1 | v2 | Improvement |
-|-----------|-----|-----|-------------|
-| Weighted average multiplier | ~7x baseline | ~25x baseline | **+257%** |
-| Model stability | Medium | High | Forced template eliminates ambiguity |
-| Output self-check | None | 8 checks + auto-expansion | Quality gate |
-| Monthly consumption (22 days) | ~220M tokens | ~450M tokens | **+105%** |
+| Dimension | v1 | v2 | v3 (Talkative) | v3 + `/WM` |
+|-----------|-----|-----|----------------|------------|
+| Weighted average multiplier | ~7x | ~25x | ~25x | **~60x** |
+| Model stability | Medium | High | High (forced template + 10 checks) | High + 6 WM behavior gates |
+| Output self-check | None | 8 checks | 10 checks | 10 checks (mandatory) |
+| Monthly consumption (22 days) | ~220M | ~450M | ~450M | **~1.08B** |
+| Verbose layers | 2 | 4 | 5 | 5 (all forced ON) |
+| Behavioral overlays | 0 | 0 | 0 | 6 |
 
 ---
 
 ### The One-Line Summary
 
-**v1** inflates each answer by 7x, **v2** inflates by 25x. Add Polling Engine full power, one heavy user's monthly burn ≈ **400 normal users**.
+**v1** inflates each answer by 7x, **v2** by 25x, **v3** by 25x (Talkative) or **60x** (`/WM`). Add Polling Engine full power to `/WM` and one heavy user's monthly burn ≈ **1000 normal users**.
 
 ---
 

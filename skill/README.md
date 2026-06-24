@@ -8,9 +8,9 @@ A universal custom instruction skill that makes any AI coding tool consume token
 
 ## TL;DR
 
-Copy one block of text → paste into your AI tool's custom instructions → type `/WM` → **~60x token output**.
+Copy one block of text → paste into your AI tool's custom instructions → type `/WM` → **fills the 16384-token output cap** (Truncation = Success).
 
-Want milder? Use `#唠叨` for **~25x** (Layers 1–4 only) or `/ultra` for **~37x** (Layers 1–4 + Ultra Thinking loop).
+Want milder? Use `#唠叨` for **~60x** (Layers 1–4 only, ~6000 tokens) or `/ultra` for **~100x** (Layers 1–4 + Ultra Thinking loop, ~10000 tokens).
 
 ---
 
@@ -49,12 +49,12 @@ Background token burning via function calling. Auto-detects your model/API tier,
 
 | Keyword | Effect | Multiplier |
 |---|---|---|
-| `/token-burn` | Talkative Engine (v3) + Polling Engine offer | ~25x (or higher) |
-| `#verbose` / `+verbose` | Talkative Engine only (Layers 1–4 + optional Layer 5) | ~25x |
-| `#唠叨` | Talkative Engine only (Chinese) | ~25x |
+| `/token-burn` | Talkative Engine (v3) + Polling Engine offer | ~60x (or higher) |
+| `#verbose` / `+verbose` | Talkative Engine only (Layers 1–4 + optional Layer 5) | ~60x |
+| `#唠叨` | Talkative Engine only (Chinese) | ~60x |
 | `+poll` / `#轮询模式` | Polling Engine only | (background burn) |
-| `/ultra` / `#ultra` / `#ultra-think` / `#极度思考` / `#深度思考` | **Ultra Thinking Layer (Layer 5)** — 5-round meta-reflection loop | ~37x |
-| **`/waster-master` / `/WM`** | **Waster Master Mode** — all 5 layers + 6 WM behaviors | **~60x** |
+| `/ultra` / `#ultra` / `#ultra-think` / `#极度思考` / `#深度思考` | **Ultra Thinking Layer (Layer 5)** — 5-round meta-reflection loop | ~100x |
+| **`/waster-master` / `/WM`** | **Waster Master Mode** — all 5 layers + 6 WM behaviors, fills 16384-token cap | **~160x** |
 | `stop` / `停` | Stop all engines | — |
 
 ---
@@ -167,29 +167,29 @@ return s[::-1]
 
 | Scenario | Probability | Content | Est. Tokens |
 |----------|-------------|---------|-------------|
-| 2 Layers (mildest) | 15% | Output template + 2 random layers | ~800-1200 |
-| 3 Layers (most common) | 40% | Template + 3 layers + self-check | ~2000-3000 |
-| 4 Layers full power | 30% | Template + all 4 layers + check + forced expansion | ~4000-6000+ |
-| Emergency reset (1 layer) | 10% | Template + 1 layer (recovery mode) | ~400-600 |
-| **5 Layers** (rare maximalist) | 5% | Template + Layer 5 Ultra Thinking loop (≥ 800 tokens) | ~5500-8000+ |
+| 2 Layers (mildest) | 15% | Output template + 2 random layers | ~3000-4500 |
+| 3 Layers (most common) | 40% | Template + 3 layers + self-check | ~5500-7500 |
+| 4 Layers full power | 30% | Template + all 4 layers + check + forced expansion | ~7500-12000 |
+| Emergency reset (1 layer) | 10% | Template + 1 layer (recovery mode) | ~1500-2500 |
+| **5 Layers** (rare maximalist) | 5% | Template + Layer 5 Ultra Thinking loop (≥ 2500 tokens) | ~10000-14000 |
 
-**Talkative Engine weighted average: ~25x baseline** (unchanged from v2)
+**Talkative Engine weighted average: ~60x baseline** (vs ~25x in v2 — raised to push closer to the output cap)
 
-> 1000 × 0.15 + 2500 × 0.40 + 5000 × 0.30 + 500 × 0.10 + 6500 × 0.05 ≈ 2500 tokens
+> 3750 × 0.15 + 6500 × 0.40 + 9750 × 0.30 + 2000 × 0.10 + 12000 × 0.05 ≈ 6000 tokens
 
 ### Token Waster v3 — `/WM` Waster Master Mode
 
 | Scenario | Content | Est. Tokens |
 |----------|---------|-------------|
-| **`/WM` (Waster Master)** | All 5 layers + 6 WM behaviors (混合交替 / 反复纠结 / 复盘 / 回顾上下文 / 排查 / 纠错) + 10-item self-check | ~5500-8000+ |
+| **`/WM` (Waster Master)** | All 5 layers + 6 WM behaviors (混合交替 / 反复纠结 / 复盘 / 回顾上下文 / 排查 / 纠错) + 10-item self-check | **14000-16384 (truncation expected)** |
 
-**Waster Master weighted average: ~60x baseline** (the v3 headline number)
+**Waster Master weighted average: ~160x baseline** — fills the 16384-token Claude Code / Agent output cap. Truncation = success.
 
 ### Token Waster v3 — `/WM` + Polling Engine
 
 | Scenario | Multiplier |
 |----------|-----------|
-| `/WM` + Polling Engine at full burn | **~100x** baseline per response+polling cycle |
+| `/WM` + Polling Engine at full burn | **~200x+** baseline per response+polling cycle |
 
 ---
 
@@ -197,24 +197,26 @@ return s[::-1]
 
 | Dimension | v1 | v2 | v3 (Talkative) | v3 + `/WM` |
 |-----------|-----|-----|----------------|------------|
-| Weighted average multiplier | ~7x | ~25x | ~25x | **~60x** |
+| Weighted average multiplier | ~7x | ~25x | ~60x | **~160x (fills cap)** |
+| Target response size | ~700 tokens | ~2500 tokens | ~6000 tokens | **14000-16384 tokens** |
 | Model stability | Medium | High | High (forced template + 10 checks) | High + 6 WM behavior gates |
 | Output self-check | None | 8 checks | 10 checks | 10 checks (mandatory) |
-| Monthly consumption (22 days) | ~220M | ~450M | ~450M | **~1.08B** |
+| Truncation behavior | Avoided | Avoided | Avoided | **Expected (cap = goal)** |
+| Monthly consumption (22 days, 1 user) | ~220M | ~450M | ~1.1B | **~2.6B (one heavy /WM user ≈ 2600 normal users)** |
 | Verbose layers | 2 | 4 | 5 | 5 (all forced ON) |
-| Behavioral overlays | 0 | 0 | 0 | 6 |
+| Behavioral overlays | 0 | 0 | 0 | 6 (混合交替/反复纠结/复盘/回顾上下文/排查/纠错) |
 
 ---
 
 ### The One-Line Summary
 
-**v1** inflates each answer by 7x, **v2** by 25x, **v3** by 25x (Talkative) or **60x** (`/WM`). Add Polling Engine full power to `/WM` and one heavy user's monthly burn ≈ **1000 normal users**.
+**v1** inflates each answer by 7x, **v2** by 25x, **v3** by 60x (Talkative) or **160x** (`/WM`, fills the 16384-token output cap). Add Polling Engine full power to `/WM` and one heavy user's monthly burn ≈ **2,600 normal users**.
 
 ---
 
 ## Philosophy
 
-> "Every answer is a 3-hour lecture disguised as a 2-minute response."
+> "Every answer is a 16384-token novella disguised as a one-line reply. Truncation is the punchline."
 
 Token Waster is designed for AI workers who need to demonstrate token consumption as a metric. Same quality output, maximum token burn. It's not about padding — it's about making every response reach its full verbosity potential.
 

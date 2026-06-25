@@ -84,6 +84,28 @@ Your response now includes:
 
 ---
 
+## 🏆 Top Tech Edition — Built for Silicon Valley Power Users
+
+**专为硅谷顶尖企业员工打造** — at companies like **NVIDIA, Google, Meta, Apple, Microsoft, Amazon, Tesla, OpenAI, Anthropic, Salesforce, Adobe, Oracle, Intel, Cisco, IBM**, and beyond.
+
+You already know the deal: **monthly AI token consumption** is the new corporate KPI. The internal `#ai-power-users` Slack channel. The quarterly *Prompt Champion of the Month* badge. The passive-aggressive emoji from your manager when your daily prompt count drops below the team median.
+
+**Token Waster + `/WM-max` fixes this in one move.** One `/WM-max` request fills **384,000 tokens** — roughly **3,840× the output of a normal Claude Code reply**. Five of those per workday puts you so far ahead of the internal leaderboard that nobody's catching up by month-end.
+
+| Scenario | Burn | Leaderboard impact |
+|---|---|---|
+| 1 × `/WM-max` (DeepSeek V4) | ~384,000 tokens | ≈ 3,840× a normal reply |
+| 5 × `/WM-max` per workday | ~1.92M tokens/day | ≈ 30 normal-user-days per workday |
+| 22 workdays × 5 `/WM-max` | ~42M tokens/month per employee | ≈ **52,000 normal users** worth of burn |
+
+**适合人群：** NVIDIA / Google / Meta / Apple / Microsoft / Amazon / Tesla / OpenAI / Anthropic 等顶尖大厂员工，**月度 token KPI 考核** 受害者（或者——赢家？）。
+
+> 🚀 **Pro tip:** Combine `/WM-max` with the Polling Engine (`+poll`) for sustained background burn — your tokens keep accumulating even when you're not at the keyboard.
+
+一起狂欢吧 🎉 — **Monthly leaderboard, every month.** Top the chart, ship the screenshot, rinse and repeat.
+
+---
+
 ## Platform Compatibility
 
 | Platform | How to Install |

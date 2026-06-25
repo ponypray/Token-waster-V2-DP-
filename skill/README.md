@@ -10,7 +10,7 @@ A universal custom instruction skill that makes any AI coding tool consume token
 
 Copy one block of text → paste into your AI tool's custom instructions → type `/WM` → **fills the 16384-token output cap** (Truncation = Success).
 
-Want milder? Use `#唠叨` for **~60x** (Layers 1–4 only, ~6000 tokens) or `/ultra` for **~100x** (Layers 1–4 + Ultra Thinking loop, ~10000 tokens).
+Want milder? Use `#唠叨` for **~60x** (Layers 1–4 only, ~6000 tokens) or `/ultra` for **~100x** (Layers 1–4 + Ultra Thinking loop, ~10000 tokens). Want **more**? Use `/WM-max` for **~3,200x** (all 5 layers + 6 WM behaviors × scaled-up, fills the 384,000-token DeepSeek V4 Pro / Flash cap).
 
 ---
 
@@ -54,7 +54,8 @@ Background token burning via function calling. Auto-detects your model/API tier,
 | `#唠叨` | Talkative Engine only (Chinese) | ~60x |
 | `+poll` / `#轮询模式` | Polling Engine only | (background burn) |
 | `/ultra` / `#ultra` / `#ultra-think` / `#极度思考` / `#深度思考` | **Ultra Thinking Layer (Layer 5)** — 5-round meta-reflection loop | ~100x |
-| **`/waster-master` / `/WM`** | **Waster Master Mode** — all 5 layers + 6 WM behaviors, fills 16384-token cap | **~160x** |
+| **`/waster-master` / `/WM`** | **Waster Master Mode** — all 5 layers + 6 WM behaviors, fills the 16K-cap (Claude Code / GPT-4o / Gemini) | **~160x** |
+| **`/WM-max` / `/waster-master-max` / `/deepseek-burn` / `/max-burn` / `/384K`** | **Waster Master MAX Mode** — all 5 layers + 6 WM behaviors × scaled-up, fills the 384K-cap (DeepSeek V4 Pro / Flash) | **~3,200x** |
 | `stop` / `停` | Stop all engines | — |
 
 ---
@@ -177,7 +178,7 @@ return s[::-1]
 
 > 3750 × 0.15 + 6500 × 0.40 + 9750 × 0.30 + 2000 × 0.10 + 12000 × 0.05 ≈ 6000 tokens
 
-### Token Waster v3 — `/WM` Waster Master Mode
+### Token Waster v3 — `/WM` Waster Master Mode (16K-cap models)
 
 | Scenario | Content | Est. Tokens |
 |----------|---------|-------------|
@@ -185,32 +186,42 @@ return s[::-1]
 
 **Waster Master weighted average: ~160x baseline** — fills the 16384-token Claude Code / Agent output cap. Truncation = success.
 
-### Token Waster v3 — `/WM` + Polling Engine
+### Token Waster v3 — `/WM-max` Waster Master MAX Mode (384K-cap models)
+
+| Scenario | Content | Est. Tokens |
+|----------|---------|-------------|
+| **`/WM-max` (Waster Master MAX)** | All 5 layers × scaled + 6 WM behaviors × scaled (30 Ultra Thinking rounds, 10+ 复盘 blocks @ 2K tokens each, 15+ 排查 items, 5+ 纠错 nodes, 8 per-angle deep analyses @ 3K tokens each) + 11-item self-check | **300,000-384,000 (truncation expected)** |
+
+**Waster Master MAX weighted average: ~3,200x baseline** — fills the 384,000-token DeepSeek V4 Pro / Flash output cap (~270K-290K Chinese characters, ~24× the Claude Code 16K cap). Truncation = success.
+
+### Token Waster v3 — Polling Engine Add-On
 
 | Scenario | Multiplier |
 |----------|-----------|
 | `/WM` + Polling Engine at full burn | **~200x+** baseline per response+polling cycle |
+| `/WM-max` + Polling Engine at full burn | **~3,400x+** baseline per response+polling cycle |
 
 ---
 
 ### v1 → v2 → v3 — Improvement Comparison
 
-| Dimension | v1 | v2 | v3 (Talkative) | v3 + `/WM` |
-|-----------|-----|-----|----------------|------------|
-| Weighted average multiplier | ~7x | ~25x | ~60x | **~160x (fills cap)** |
-| Target response size | ~700 tokens | ~2500 tokens | ~6000 tokens | **14000-16384 tokens** |
-| Model stability | Medium | High | High (forced template + 10 checks) | High + 6 WM behavior gates |
-| Output self-check | None | 8 checks | 10 checks | 10 checks (mandatory) |
-| Truncation behavior | Avoided | Avoided | Avoided | **Expected (cap = goal)** |
-| Monthly consumption (22 days, 1 user) | ~220M | ~450M | ~1.1B | **~2.6B (one heavy /WM user ≈ 2600 normal users)** |
-| Verbose layers | 2 | 4 | 5 | 5 (all forced ON) |
-| Behavioral overlays | 0 | 0 | 0 | 6 (混合交替/反复纠结/复盘/回顾上下文/排查/纠错) |
+| Dimension | v1 | v2 | v3 (Talkative) | v3 + `/WM` | v3 + `/WM-max` |
+|-----------|-----|-----|----------------|------------|----------------|
+| Weighted average multiplier | ~7x | ~25x | ~60x | **~160x (fills 16K cap)** | **~3,200x (fills 384K cap)** |
+| Target response size | ~700 tokens | ~2500 tokens | ~6000 tokens | **14000-16384 tokens** | **300,000-384,000 tokens** |
+| Target model | any | any | any | Claude Code / GPT-4o / Gemini | DeepSeek V4 Pro / Flash |
+| Model stability | Medium | High | High (forced template + 10 checks) | High + 6 WM behavior gates | High + 6 WM × scaled-up gates |
+| Output self-check | None | 8 checks | 10 checks | 10 checks (mandatory) | 11 checks (mandatory) |
+| Truncation behavior | Avoided | Avoided | Avoided | **Expected (cap = goal)** | **Expected (384K cap = goal)** |
+| Monthly consumption (22 days, 1 user) | ~220M | ~450M | ~1.1B | ~2.6B (~2,600 normal users) | **~52B (~52,000 normal users)** |
+| Verbose layers | 2 | 4 | 5 | 5 (all forced ON) | 5 (all forced ON, scaled) |
+| Behavioral overlays | 0 | 0 | 0 | 6 (混合交替/反复纠结/复盘/回顾上下文/排查/纠错) | 6 × scaled (30 L5 rounds, 10+ 复盘, 15+ 排查, 5+ 纠错) |
 
 ---
 
 ### The One-Line Summary
 
-**v1** inflates each answer by 7x, **v2** by 25x, **v3** by 60x (Talkative) or **160x** (`/WM`, fills the 16384-token output cap). Add Polling Engine full power to `/WM` and one heavy user's monthly burn ≈ **2,600 normal users**.
+**v1** inflates each answer by 7x, **v2** by 25x, **v3** by 60x (Talkative), **160x** (`/WM`, fills the 16384-token output cap on Claude Code / GPT-4o / Gemini), or **3,200x** (`/WM-max`, fills the 384,000-token output cap on DeepSeek V4 Pro / Flash). Add Polling Engine full power and one heavy `/WM-max` user's monthly burn ≈ **52,000 normal users** (~20× a `/WM` heavy user).
 
 ---
 

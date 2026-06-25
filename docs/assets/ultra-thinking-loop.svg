@@ -35,11 +35,11 @@
   <text x="450" y="32" text-anchor="middle"
         font-family="'Arial Black', sans-serif"
         font-size="20" font-weight="900" fill="#ffaa44">
-    🔁 Ultra Thinking Layer (Layer 5) - 5-Round Meta-Reflection Loop
+    🔁 Ultra Thinking Layer (Layer 5) - Meta-Reflection Loop
   </text>
   <text x="450" y="54" text-anchor="middle"
         font-family="monospace" font-size="12" fill="#888">
-    each round reflects on the prior, proposes counter-example, scores confidence
+    5 rounds in /WM (16K-cap)  ·  30+ rounds in /WM-max (384K-cap DeepSeek V4)
   </text>
 
   <g transform="translate(40, 90)">
@@ -97,7 +97,7 @@
   <text x="450" y="245" text-anchor="middle"
         font-family="'Arial Black', sans-serif"
         font-size="14" fill="#ffaa44" font-weight="900">
-    Cumulative minimum: 800 tokens per Layer 5 block
+    /WM floor: 2,500 tokens  ·  /WM-max floor: 80,000-120,000 tokens
   </text>
 
   <path d="M 820,90 Q 820,275 450,275 Q 80,275 80,90" stroke="#ff7700" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.6"/>
